@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';  // Importing jwt to generate token
 
 // SignUp route
@@ -12,7 +12,7 @@ export const signUp = async (req, res) => {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcryptjs.hash(password, 10);
 
     const user = await User.create({
       name,
@@ -38,7 +38,7 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcryptjs.compare(password, user.password);
 
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
