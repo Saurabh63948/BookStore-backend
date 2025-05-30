@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
   },
   isHost: {
     type: Boolean,
-    default: false
+    default: true
   }
 }, {
   timestamps: true
